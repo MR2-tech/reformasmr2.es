@@ -1,0 +1,43 @@
+---
+import type { Review } from "../types/review";
+
+interface Props {
+  review: Review;
+}
+
+const { review } = Astro.props;
+
+const MAX_STARS = 5;
+
+let stars = Array.from({ length: MAX_STARS }, (_, index) => {
+  return {
+    image: index + 1 > review.score ? "empty-star.svg" : "full-star.svg",
+  };
+});
+---
+
+<div>
+  <h5 class="fw-bold">{review.client_name}</h5>
+  <div>
+    {
+      stars.map((star) => (
+        <img
+          src={`images/${star.image}`}
+          alt="star"
+          style={{
+            width: "20px",
+          }}
+        />
+      ))
+    }
+  </div>
+  <p
+    style={{
+      textAlign: "justify",
+      textJustify: "inter-word",
+      marginTop: "10px",
+    }}
+  >
+    {review.description}
+  </p>
+</div>

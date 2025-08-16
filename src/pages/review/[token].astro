@@ -1,0 +1,155 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+
+import { supabase } from "../../lib/supabase";
+
+const { token } = Astro.params;
+
+const { data: tokenRecord, error } = await supabase
+  .from("review_creation_tokens")
+  .select("*, reviews(id)")
+  .eq("id", token)
+  .single();
+
+if (error || !tokenRecord) {
+  const errorMessage = encodeURIComponent(
+    "Url para reseña no válida o expirada"
+  );
+  return Astro.redirect(`/error?message=${errorMessage}`, 303);
+} else if (tokenRecord?.reviews?.length > 0) {
+  return Astro.redirect("/thank-you", 303);
+}
+---
+
+<Layout title="Nueva reseña - Reformando tu futuro">
+  <section
+    class="contact-section"
+    style="background: var(--light-3); padding: 40px 0;"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <div class="contact-form-wrapper">
+            <div class="section-title text-center mb-5">
+              <h2>Deja tu reseña</h2>
+              <p>
+                Nos encantaría conocer tu experiencia trabajando con nosotros
+              </p>
+            </div>
+
+            <form
+              method="POST"
+              action={`/api/review/${token}`}
+              class="contact-form"
+              id="reviewForm"
+            >
+              <!-- Name Field -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group mb-4">
+                    <label for="clientName" class="form-label fw-semibold mb-2">
+                      <i class="lni lni-user color-black"></i> Tu nombre
+                    </label>
+                    <input
+                      type="text"
+                      id="clientName"
+                      required={true}
+                      class="form-control"
+                      name="clientName"
+                      placeholder="Escribe tu nombre completo"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Star Rating -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group mb-4">
+                    <label class="form-label fw-semibold mb-3">
+                      <i class="lni lni-star-filled"></i> Valoración
+                    </label>
+                    <div class="star-rating-container">
+                      <div class="star-rating" id="starRating">
+                        <input
+                          type="radio"
+                          name="score"
+                          value="5"
+                          id="star5"
+                          required
+                        />
+                        <label for="star5" class="star">
+                          <i class="lni lni-star-filled"></i>
+                        </label>
+                        <input type="radio" name="score" value="4" id="star4" />
+                        <label for="star4" class="star">
+                          <i class="lni lni-star-filled"></i>
+                        </label>
+                        <input type="radio" name="score" value="3" id="star3" />
+                        <label for="star3" class="star">
+                          <i class="lni lni-star-filled"></i>
+                        </label>
+                        <input type="radio" name="score" value="2" id="star2" />
+                        <label for="star2" class="star">
+                          <i class="lni lni-star-filled"></i>
+                        </label>
+                        <input type="radio" name="score" value="1" id="star1" />
+                        <label for="star1" class="star">
+                          <i class="lni lni-star-filled"></i>
+                        </label>
+                      </div>
+                      <p class="rating-text" id="ratingText">
+                        Selecciona una puntuación
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description Field -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group mb-4">
+                    <label
+                      for="description"
+                      class="form-label fw-semibold mb-2"
+                    >
+                      <i class="lni lni-pencil"></i> Cuéntanos tu experiencia
+                    </label>
+                    <textarea
+                      id="description"
+                      required={true}
+                      class="form-control"
+                      name="description"
+                      maxlength={300}
+                      rows="5"
+                      placeholder="Describe tu experiencia trabajando con nosotros. ¿Qué te pareció nuestro servicio? ¿Recomendarías nuestro trabajo?"
+                    ></textarea>
+                    <div class="character-counter">
+                      <small class="text-muted">
+                        <span id="charCount">0</span>/300 caracteres
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="row">
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn primary-btn" id="submitBtn">
+                    <i class="lni lni-checkmark-circle"></i>
+                    Enviar reseña
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/review.js" is:inline></script>
+</Layout>

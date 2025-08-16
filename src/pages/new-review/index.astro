@@ -1,0 +1,108 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const { url } = Astro.request;
+const searchParams = new URL(url).searchParams;
+const newRewiewUrl = searchParams.get("new_review_url");
+const error = searchParams.get("error");
+---
+
+<Layout>
+  <div class="container-fluid">
+    <div class="row p-5 justify-content-center">
+      <div class="col-12 col-md-6 col-xl-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4">
+              <i class="lni lni-key text-primary me-2"></i>
+              Generar Nueva Revisión
+            </h4>
+
+            <form method="POST" action="/api/create-token" id="review-form">
+              <div class="form-group mb-3">
+                <label for="secret-key" class="form-label fw-semibold">
+                  <i class="lni lni-lock me-1"></i>
+                  Ingresa la clave:
+                </label>
+                <div class="position-relative">
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control form-control-lg pe-5"
+                    id="secret-key"
+                    placeholder="Ingresa tu clave secreta"
+                    required={true}
+                    autocomplete="current-password"
+                  />
+                  <button
+                    class="btn primary-btn-outline position-absolute top-50 end-0 translate-middle-y me-2"
+                    type="button"
+                    id="get-review-token-button"
+                    title="Mostrar/Ocultar contraseña"
+                    style="padding: 0.375rem 0.5rem; z-index: 3;"
+                  >
+                    Mostrar
+                  </button>
+                </div>
+                <div class="form-text">
+                  <small class="text-muted">
+                    <i class="lni lni-information me-1"></i>
+                    Esta clave es necesaria para generar el enlace de revisión
+                  </small>
+                </div>
+              </div>
+
+              {
+                error && (
+                  <div
+                    class="alert alert-danger d-flex align-items-center"
+                    role="alert"
+                  >
+                    <i class="lni lni-warning me-2" />
+                    <div>{error}</div>
+                  </div>
+                )
+              }
+
+              {
+                newRewiewUrl && (
+                  <div class="alert alert-success" role="alert">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>
+                        <strong>URL generada:</strong>
+                        <br />
+                        <small class="text-break">{newRewiewUrl}</small>
+                      </div>
+                      <button
+                        class="btn btn-sm btn-outline-success ms-2"
+                        type="button"
+                        id="copy-url"
+                        title="Copiar URL"
+                      >
+                        <i class="lni lni-copy" />
+                      </button>
+                    </div>
+                  </div>
+                )
+              }
+
+              <div class="d-grid">
+                <button type="submit" class="btn primary-btn">
+                  <span
+                    class="spinner-border spinner-border-sm me-2 d-none"
+                    role="status"
+                    aria-hidden="true"
+                    id="loading-spinner"></span>
+                  <i class="lni lni-checkmark-circle me-2" id="submit-icon"></i>
+                  Generar Enlace de Revisión
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/new-review-key.js" is:inline></script>
+</Layout>

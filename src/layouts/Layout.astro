@@ -1,0 +1,39 @@
+---
+const { title } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" /><link
+      rel="shortcut icon"
+      href="../images/favicon.svg"
+    /><link rel="stylesheet" href="/css/bootstrap.min.css" /><link
+      rel="stylesheet"
+      href="/css/lineicons.css"
+    /><link rel="stylesheet" href="/css/glightbox.min.css" /><link
+      rel="stylesheet"
+      href="/css/style.css"
+    />
+    <link rel="stylesheet" href="/css/carousel.css" />
+    <link rel="stylesheet" href="/css/lightbox.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/animejs@4.0.2/lib/anime.umd.min.js"
+      is:inline></script><title>
+      {title ?? "Reformando tu futuro"}
+    </title>
+  </head>
+
+  <body id="root">
+    <slot /><!-- your content is injected here -->
+
+    <script src="/js/bootstrap.bundle.min.js" is:inline></script>
+    <script src="/js/glightbox.min.js" is:inline></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const searchParamMessage = Astro.url.searchParams.get("message");
+
+interface Props {
+  message?: string;
+}
+
+const { message } = Astro.props;
+
+const messageToDisplay = message ?? searchParamMessage ?? "Algo ha salido mal.";
+---
+
+<Layout>
+  <div class="text-center p-5">
+    <h3>{messageToDisplay}</h3>
+    <a href="/" class="btn btn-primary mt-2"> Volver al inicio </a>
+  </div>
+</Layout>
