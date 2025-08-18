@@ -17,25 +17,11 @@ if (error) {
 }
 
 // Generate image arrays for different project types
-const reformaIntegralImages = Array(11)
+const reformaIntegralImages = Array(17)
   .fill(0)
   .map(
     (_, index) =>
       `images/projects/reforma-integral/${index < 9 ? "0".concat((index + 1).toString()) : index + 1}.jpeg`,
-  );
-
-const reformaBanosImages = Array(17)
-  .fill(0)
-  .map(
-    (_, index) =>
-      `images/projects/reforma-banos/${index < 9 ? "0".concat((index + 1).toString()) : index + 1}.jpeg`,
-  );
-
-const duranteObraImages = Array(6)
-  .fill(0)
-  .map(
-    (_, index) =>
-      `images/projects/durante-obra/${index < 9 ? "0".concat((index + 1).toString()) : index + 1}.jpeg`,
   );
 
 const year = new Date().getFullYear();
@@ -248,20 +234,6 @@ const year = new Date().getFullYear();
         images={reformaIntegralImages}
         altPrefix="Reforma Integral"
         id="reforma-integral"
-      />
-
-      <ProjectCarousel
-        category="Reformas de Baños"
-        images={reformaBanosImages}
-        altPrefix="Reforma de Baño"
-        id="reforma-banos"
-      />
-
-      <ProjectCarousel
-        category="Durante la obra"
-        images={duranteObraImages}
-        altPrefix="Durante la obra"
-        id="durante-obra"
       />
     </div>
   </div>
