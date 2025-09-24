@@ -1,42 +1,18 @@
-# Reformando tu Futuro - Website
+# Reformas MR2 - Website
 
-A modern construction and renovation company website built with Astro, featuring responsive carousels, lightbox gallery, and customer review system.
+A modern construction and renovation company website built with Astro, featuring responsive carousels, modal galleries, customer review system, and token-based review management.
 
-### CI/CD Pipeline
+## ✨ Features
 
-This project has automated CI/CD configured for continuous deployment:
+## ✨ Features
 
-#### **Vercel Integration**
-
-- **Account**: reformandotufuturo.tech@gmail.com
-- **Automatic deployments** are configured for:
-  - **Master branch** → Production deployment
-  - **Develop branch** → Preview deployment
-
-#### **Deployment Process**
-
-1. **Push to develop** → Triggers preview deployment for testing
-2. **Push to master** → Triggers production deployment
-3. **Pull requests** → Generate preview deployments for review
-
-#### **Branch Strategy**
-
-- `master` - Production-ready code
-- `develop` - Development and testing
-- Feature branches → Create PR to `develop`
-
-All deployments are automatic and include:
-
-- ✅ Build verification
-- ✅ Environment variable injection
-- ✅ Performance optimization
-- ✅ CDN distributiononal construction company website
-- 📱 **Responsive**: Optimized for all devices and screen sizes
-- 🖼️ **Project Galleries**: Multiple responsive carousels for different project types
-- 🔍 **Lightbox Gallery**: Full-screen image viewer with navigation
-- ⭐ **Customer Reviews**: Integrated review system with Supabase
-- 🎨 **Smooth Animations**: Professional animations and transitions
+- 📱 **Responsive Design**: Optimized for all devices and screen sizes
+- 🖼️ **Project Galleries**: Multiple responsive carousels with modal viewer
+- 🔍 **Modal Gallery**: Full-screen image viewer with navigation and category display
+- ⭐ **Review System**: Token-based customer review system with star ratings
+- 🎨 **Smooth Animations**: Professional animations with Motion.js
 - 🚀 **Fast Performance**: Built with Astro for optimal loading speeds
+- 🔒 **Secure Reviews**: Protected review creation with secret key validation
 
 ## 🚀 Project Structure
 
@@ -57,62 +33,66 @@ All deployments are automatic and include:
 │   │   ├── LineIcons.woff
 │   │   └── LineIcons.woff2
 │   ├── js/                    # JavaScript files
-│   │   ├── animations.js      # Page animations
-│   │   ├── bootstrap.bundle.min.js # Bootstrap JavaScript
-│   │   ├── glightbox.min.js   # GLightbox functionality
-│   │   ├── lightbox.js        # Lightbox functionality
-│   │   ├── main.js            # Main JavaScript
-│   │   ├── multi-carousel.js  # Carousel functionality
-│   │   ├── new-review-key.js  # Review key generation
-│   │   └── review.js          # Review functionality
+│   │   ├── animations.js      # Page animations with Motion.js
+│   │   ├── bootstrap.bundle.min.js # Bootstrap framework
+│   │   ├── glightbox.min.js   # GLightbox library (unused)
+│   │   ├── lightbox.js        # Custom lightbox functionality
+│   │   ├── main.js            # Main JavaScript and navigation
+│   │   ├── modal-carousel.js  # Modal carousel functionality
+│   │   ├── multi-carousel.js  # Multi-project carousel functionality
+│   │   ├── new-review-key.js  # Review key generation interface
+│   │   └── review.js          # Review form interactions
 │   └── images/                # Image assets
-│       ├── empty-star.svg     # Empty star icon
+│       ├── empty-star.svg     # Empty star icon for reviews
 │       ├── favicon.svg        # Site favicon
-│       ├── full-star.svg      # Full star icon
-│       ├── logo.jpg           # Main company logo
-│       ├── logo-horizontal.jpg # Horizontal logo variant
-│       ├── logo-horizontal-inverted.jpg # Horizontal inverted logo
-│       ├── logo-inverted.jpg  # Inverted logo for dark backgrounds
-│       ├── call-action/       # Call to action images
+│       ├── full-star.svg      # Full star icon for reviews
+│       ├── logo.png           # Main company logo
+│       ├── logo-white.png     # White logo for dark backgrounds
+│       ├── call-action/       # Call to action section images
 │       │   └── overlay.png
 │       ├── header/            # Header background images
+│       │   ├── 2991.jpg
 │       │   ├── background.jpg
 │       │   ├── background-2.jpg
 │       │   ├── background-3.jpg
 │       │   └── header-image.png
-│       └── projects/          # Project photos
-│           ├── reforma-integral/    # Complete renovation photos (11 images)
-│           ├── reforma-banos/       # Bathroom renovation photos (17 images)
-│           └── durante-obra/        # Construction process photos (6 images)
+│       └── projects/          # Project portfolio images
+│           ├── diseno-planificacion/     # Design & planning projects
+│           ├── pintura-y-decoracion/     # Painting & decoration projects
+│           ├── reforma-banos/            # Bathroom renovation projects (20 images)
+│           ├── reforma-cocina/           # Kitchen renovation projects (6 images)
+│           ├── reforma-integral/         # Complete renovation projects (17 images)
+│           └── servicio-urgencias/       # Emergency service projects
 ├── src/
 │   ├── components/
-│   │   ├── ProjectCarousel.astro    # Reusable carousel component
-│   │   ├── Review.astro             # Customer review component
-│   │   └── Welcome.astro            # Welcome section component
+│   │   ├── ModalCarousel.astro      # Modal gallery component for full-screen viewing
+│   │   ├── ProjectCarousel.astro    # Responsive carousel component
+│   │   ├── Review.astro             # Customer review display component
+│   │   └── Welcome.astro            # Welcome section component (unused)
 │   ├── layouts/
 │   │   └── Layout.astro             # Main page layout
 │   ├── lib/
-│   │   └── supabase.ts              # Supabase configuration
+│   │   └── supabase.ts              # Supabase client configuration
 │   ├── pages/
-│   │   ├── index.astro              # Homepage
+│   │   ├── index.astro              # Main homepage with all sections
 │   │   ├── 404.astro                # 404 error page
-│   │   ├── api/                     # API routes
-│   │   │   ├── create-token.ts      # Token creation API
+│   │   ├── api/                     # API routes for review system
+│   │   │   ├── create-token.ts      # Review token creation endpoint
 │   │   │   └── review/
-│   │   │       └── [token].ts       # Review token API
+│   │   │       └── [token].ts       # Review submission endpoint
 │   │   ├── error/
-│   │   │   └── index.astro          # Error page
+│   │   │   └── index.astro          # Generic error page
 │   │   ├── new-review/
-│   │   │   └── index.astro          # New review form
+│   │   │   └── index.astro          # Review token generation form
 │   │   ├── review/
-│   │   │   └── [token].astro        # Review submission page
+│   │   │   └── [token].astro        # Customer review submission form
 │   │   └── thank-you/
-│   │       └── index.astro          # Thank you page
+│   │       └── index.astro          # Post-submission thank you page
 │   └── types/
-│       └── review.ts                # TypeScript types
-├── .vscode/                    # VS Code configuration
-│   ├── extensions.json        # Recommended extensions
-│   └── launch.json            # Debug configuration
+│       └── review.ts                # TypeScript interfaces for reviews
+│   ├── .vscode/                # VS Code workspace configuration
+│   │   ├── extensions.json    # Recommended extensions for development
+│   │   └── launch.json        # Debug configuration for Astro
 ├── astro.config.mjs           # Astro configuration
 ├── tsconfig.json              # TypeScript configuration
 └── package.json               # Project dependencies and scripts
@@ -120,13 +100,12 @@ All deployments are automatic and include:
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Astro](https://astro.build/) v5.8.1
-- **Runtime**: Node.js 18+
-- **Database**: [Supabase](https://supabase.com/) for customer reviews
-- **Deployment**: [Vercel](https://vercel.com/) with server-side rendering
-- **Animations**: [Motion](https://motion.dev/) for smooth transitions
-- **Styling**: Custom CSS with Bootstrap components
-- **Image Gallery**: GLightbox for full-screen viewing
+- **Framework**: [Astro](https://astro.build/) v5.8.1 with server-side rendering
+- **Database**: [Supabase](https://supabase.com/) for reviews and token management
+- **Deployment**: [Vercel](https://vercel.com/) with automatic CI/CD
+- **Animations**: [Motion](https://motion.dev/) v12.16.0 for smooth transitions
+- **Styling**: Custom CSS with Bootstrap 5 components
+- **Icons**: LineIcons font for consistent iconography
 
 ## 🚀 Getting Started
 
@@ -134,15 +113,15 @@ All deployments are automatic and include:
 
 - Node.js 18+
 - npm or yarn
-- Supabase account (for reviews functionality)
+- Supabase account for reviews functionality
 
 ### Installation
 
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd reformando-tu-futuro.com
+   git clone https://github.com/MR2-tech/reformasmr2.es.git
+   cd reformasmr2.es
    ```
 
 2. **Install dependencies**
@@ -151,251 +130,184 @@ All deployments are automatic and include:
    npm install
    ```
 
-3. **Set up environment variables** (see [Environment Variables](#environment-variables) section)
+3. **Set up environment variables** (see Environment Variables section)
 
 4. **Start development server**
-
    ```bash
    npm run dev
    ```
-
-   The server will start with `--host` flag to allow external access.
-
-5. **Open your browser**
-   Navigate to `http://localhost:4321`
+   Server starts at `http://localhost:4321` with `--host` flag for network access.
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                                       |
-| :------------------------ | :----------------------------------------------------------- |
-| `npm install`             | Installs dependencies                                        |
-| `npm run dev`             | Starts local dev server at `localhost:4321` with host access |
-| `npm run build`           | Build your production site to `./dist/`                      |
-| `npm run preview`         | Preview your build locally, before deploying                 |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check`             |
-| `npm run astro -- --help` | Get help using the Astro CLI                                 |
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `npm install`     | Installs dependencies                       |
+| `npm run dev`     | Starts local dev server with network access |
+| `npm run build`   | Build production site to `./dist/`          |
+| `npm run preview` | Preview build locally before deploying      |
+| `npm run astro`   | Run Astro CLI commands                      |
 
 ## 🔧 Environment Variables
 
-Create a `.env` file in the root directory with the following variables:
+Create a `.env` file in the root directory:
 
 ```env
-# Supabase Configuration (for customer reviews)
+# Supabase Configuration
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_KEY=your_supabase_anon_key
 
-# Secret key for token generation
+# Review token generation
 SECRET_KEY=your_random_secret_key
-
-# Example:
-# SUPABASE_URL=https://xxxxxxxxxxxxx.supabase.co
-# SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-# SECRET_KEY=your-secure-random-key-here
 ```
 
-> **Note**: The environment variables do not use the `PUBLIC_` prefix as they are accessed server-side through `import.meta.env`.
+> **Note**: Variables are accessed server-side and do not use `PUBLIC_` prefix.
 
 ### Setting up Supabase
 
 1. **Create a Supabase project** at [supabase.com](https://supabase.com)
 
-2. **Create the reviews table** with the following SQL:
+2. **Create the required tables**:
 
    ```sql
-   CREATE TABLE public.review_creation_tokens (
-      id uuid not null default gen_random_uuid (),
-      expires_at timestamp with time zone not null,
-      created_at timestamp with time zone not null default now(),
-      constraint review_creation_token_pkey primary key (id)
-   )  TABLESPACE pg_default;
-   
-   CREATE TABLE public.reviews (
-      id uuid not null default gen_random_uuid (),
-      client_name character varying not null,
-      score smallint not null,
-      description text null,
-      created_at timestamp with time zone not null default now(),
-      creation_token_id uuid not null,
-      constraint reviews_pkey primary key (id),
-      constraint reviews_creation_token_id_fkey foreign KEY (creation_token_id) references review_creation_tokens (id) on update CASCADE on delete CASCADE
-   ) TABLESPACE pg_default;
-   ```
-   
+   CREATE TABLE review_creation_tokens (
+      id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      expires_at timestamp with time zone NOT NULL,
+      created_at timestamp with time zone DEFAULT now()
+   );
 
-3. **Get your credentials** from Project Settings > API
-   - Copy the Project URL to `SUPABASE_URL`
-   - Copy the anon public key to `SUPABASE_KEY`
-   - Generate a secure random string for `SECRET_KEY`
+   CREATE TABLE reviews (
+      id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+      client_name varchar NOT NULL,
+      score smallint NOT NULL,
+      description text,
+      created_at timestamp with time zone DEFAULT now(),
+      creation_token_id uuid REFERENCES review_creation_tokens(id)
+   );
+   ```
+
+3. **Get your credentials** from Project Settings > API and add to `.env`
 
 ## 🖼️ Managing Project Images
 
-### Adding New Project Categories
+### Current Project Categories
 
-1. **Create a new folder** in `public/images/projects/`:
+The website supports 6 project categories:
 
-   ```
-   public/images/projects/your-new-category/
-   ```
+- **Reforma Integral** (17 images) - Complete home renovations
+- **Reforma Baños** (20 images) - Bathroom renovations
+- **Reforma Cocina** (6 images) - Kitchen renovations
+- **Pintura y Decoración** - Painting and decoration projects
+- **Diseño y Planificación** - Design and planning projects
+- **Servicio Urgencias** - Emergency repair services
 
-2. **Add images** with sequential naming:
+### Adding New Images
 
-   ```
-   01.jpeg, 02.jpeg, 03.jpeg, etc.
-   ```
-
-3. **Update the homepage** (`src/pages/index.astro`):
-
+1. **Add images** to the appropriate folder in `public/images/projects/[category]/`
+2. **Use sequential naming**: `01.jpeg`, `02.jpeg`, etc.
+3. **Update image counts** in `src/pages/index.astro`:
    ```astro
-   // Add new image array
-   const yourNewCategoryImages = Array(numberOfImages)
-     .fill(0)
-     .map((_, index) =>
-       `images/projects/your-new-category/${index < 9 ? "0".concat((index + 1).toString()) : index + 1}.jpeg`
-     );
+   const reformaIntegralImages = Array(17) // Update number
    ```
 
-4. **Add the carousel** to the projects section:
-   ```astro
-   <ProjectCarousel
-     category="Your New Category"
-     images={yourNewCategoryImages}
-     altPrefix="Your Category"
-     id="your-category-id"
-   />
-   ```
+### Image Optimization
 
-### Updating Existing Images
-
-1. **Replace images** in the corresponding folders:
-
-   - `public/images/projects/reforma-integral/` - Complete renovations
-   - `public/images/projects/reforma-banos/` - Bathroom renovations
-   - `public/images/projects/durante-obra/` - Construction process
-
-2. **Keep the naming convention**: 01.jpeg, 02.jpeg, etc.
-
-3. **Update image counts** in `src/pages/index.astro` if needed:
-   ```astro
-   const reformaIntegralImages = Array(11) // Complete renovations
-   const reformaBanosImages = Array(17)    // Bathroom renovations
-   const duranteObraImages = Array(6)      // Construction process
-   ```
-
-### Supported Image Formats
-
-- **JPEG** (.jpeg, .jpg) - Recommended for photos
-- **PNG** (.png) - For images with transparency
-- **WebP** (.webp) - Modern format for better compression
-
-### Image Optimization Tips
-
-- **Recommended size**: 1200px - 1920px width for best quality
-- **File size**: Keep under 500KB per image for fast loading
-- **Aspect ratio**: Maintain consistent ratios within each category
+- **Recommended size**: 1200-1920px width
+- **File size**: Under 500KB per image
+- **Format**: JPEG for photos, PNG for transparency
+- **Aspect ratio**: Keep consistent within categories
 
 ## 🎨 Customization
 
-### Colors and Branding
+### Styling and Branding
 
-- **Main styles**: Edit `public/css/style.css`
-- **Carousel styles**: Edit `public/css/carousel.css`
-- **Lightbox styles**: Edit `public/css/lightbox.css`
+- **Main styles**: `public/css/style.css`
+- **Carousel styles**: `public/css/carousel.css`
+- **Modal gallery**: `public/css/lightbox.css`
 
 ### Company Information
 
-Update company details in `src/pages/index.astro`:
+Update details in `src/pages/index.astro`:
 
-- Contact information
-- Address
-- Business hours
-- Services offered
+- Contact information and address
+- Business hours and services
+- WhatsApp integration (+34640113953)
 
-### Logo and Branding
+### Logo and Assets
 
-Replace logos in `public/images/`:
+Replace files in `public/images/`:
 
-- `logo.jpg` - Main logo
-- `logo-inverted.jpg` - Logo for dark backgrounds
-- `logo-horizontal.jpg` - Horizontal version
+- `logo.png` - Main logo
+- `logo-white.png` - Logo for dark backgrounds
 - `favicon.svg` - Browser favicon
 
 ## 🚀 Deployment
 
-### Building for Production
+### Build for Production
 
 ```bash
 npm run build
 ```
 
-This creates a `dist/` folder with the production build.
+Creates optimized `dist/` folder ready for deployment.
 
-### Deployment Options
+### Vercel Deployment (Recommended)
 
-- **Vercel** (Recommended): This project is optimized for Vercel with server-side rendering
-  - Automatic deployments from Git
-  - Built-in environment variable management
-  - Edge functions support for API routes
-- **Netlify**: Also supports Astro with server-side rendering
-- **Static hosting**: Can be built for static deployment by changing `output` in `astro.config.mjs`
+This project is optimized for Vercel with:
 
-### Environment Variables in Production
+- Server-side rendering enabled
+- Automatic deployments from Git
+- Environment variable management
+- API routes support
 
-Remember to set your environment variables in your hosting platform:
+Set environment variables in Vercel dashboard under Project Settings.
 
-- `SUPABASE_URL`
-- `SUPABASE_KEY`
-- `SECRET_KEY`
+## 📱 Key Features
 
-> **Important**: Since this project uses Vercel adapter with server-side rendering (`output: "server"`), make sure to configure these variables in your Vercel dashboard under Project Settings > Environment Variables.
+### Review System
 
-## 📱 Features Overview
+- **Token-based**: Secure review creation with secret key validation
+- **Star ratings**: 1-5 star rating system with descriptive text
+- **Form validation**: Character limits and required field validation
+- **Thank you flow**: Complete submission experience
 
-### Responsive Carousels
+### Project Galleries
 
-- **Mobile**: 1 image per view
-- **Tablet**: 2 images per view
-- **Desktop**: 3 images per view
-- **Large screens**: 4 images per view
+- **Modal viewer**: Full-screen image viewing with navigation
+- **Responsive carousels**: Adapts to screen size (1-4 images per view)
+- **Multiple categories**: 6 different project types supported
+- **Smooth animations**: Professional transitions powered by Motion.js
 
-### Lightbox Gallery
+### Contact Integration
 
-- Click any image to open full-screen view
-- Navigate with arrows, keyboard, or swipes
-- Shows image counter and category
-- Responsive design for all devices
+- **WhatsApp integration**: Direct contact via WhatsApp
+- **Email contact**: contacto@reformasmr2.es
+- **Address mapping**: Google Maps integration
+- **Business hours**: Clearly displayed contact information
 
-## 🔧 Development Setup
+## 🔧 Development
 
-### VS Code Configuration
+### VS Code Setup
 
-This project includes VS Code configuration files:
+The project includes optimized VS Code configuration:
 
-- **`.vscode/extensions.json`**: Recommended extensions for optimal development experience
-- **`.vscode/launch.json`**: Debug configuration for Astro applications
+- **Recommended extensions**: Astro, TypeScript support
+- **Debug configuration**: Ready for Astro development
+- **Development server**: Runs with `--host` for network access
 
-### Recommended Extensions
+### Review System Architecture
 
-The project suggests installing:
+1. **Token generation**: `/new-review` creates secure tokens
+2. **Review submission**: `/review/[token]` handles form submissions
+3. **Database storage**: Supabase handles reviews and token management
+4. **Validation**: Server-side validation for security
 
-- Astro extension for syntax highlighting and IntelliSense
-- TypeScript and JavaScript language support
-- CSS/SCSS support extensions
-
-### Development Server
-
-The development server runs with the `--host` flag, allowing external access:
-
-```bash
-npm run dev
-# Server accessible at:
-# - Local: http://localhost:4321
-# - Network: http://[your-ip]:4321
-```
+---
 
 ## 📞 Support
 
-For support or questions about this website:
+**Email**: contacto@reformasmr2.es  
+**Phone**: +34640113953  
+**Address**: Calle de Toledo 50, 28939 Arroyomolinos, Madrid
 
-- **Email**: reformandotufuturo.tech@gmail.com
+**Repository**: [MR2-tech/reformasmr2.es](https://github.com/MR2-tech/reformasmr2.es)
