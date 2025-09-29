@@ -28,20 +28,12 @@ export const POST: APIRoute = async ({
     request.headers.get("x-client-ip") ||
     "unknown";
 
-  // Handle local development (IPv6 loopback)
   if (clientIp === "::1" || clientIp === "127.0.0.1") {
     const isProduction = import.meta.env.PROD;
 
     if (!isProduction) {
       console.log("Development mode detected - IP:", clientIp);
 
-      // Option 1: Generate unique IP for each request (to test rate limiting)
-      // clientIp = `dev-${Date.now()}-${Math.random()}`;
-
-      // Option 2: Use fixed localhost identifier (allows only 1 review per dev session)
-      // clientIp = "localhost-dev";
-
-      // Option 3: Use session-based identifier (allows testing rate limiting)
       const sessionId =
         request.headers.get("user-agent")?.slice(0, 50) || "unknown-session";
       clientIp = `localhost-${sessionId}`;
@@ -50,12 +42,10 @@ export const POST: APIRoute = async ({
 
   console.log("Detected IP:", clientIp);
 
-  // Skip rate limiting in development
   const isProduction = import.meta.env.PROD;
   const shouldCheckRateLimit = isProduction || clientIp !== "localhost-dev";
 
   if (shouldCheckRateLimit) {
-    // Check if this IP has already submitted a review
     const { data: existingReviews, error: checkError } = await supabase
       .from("reviews")
       .select("id")
