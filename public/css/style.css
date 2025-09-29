@@ -1865,3 +1865,18 @@ only screen and (min-width: 1400px) {
     font-size: 12px;
   }
 }
+
+/* Review Form Error Message */
+.error-message {
+  border-radius: 8px;
+  border: 1px solid var(--error);
+  background-color: var(--error-light);
+  color: var(--error-dark);
+  padding: 15px;
+  margin-bottom: 20px;
+  animation: slideDown 0.3s ease-out;
+}
+
+.error-message i {
+  margin-right: 8px;
+}

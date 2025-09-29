@@ -4,4 +4,5 @@ export interface Review {
   readonly score: number;
   readonly description: string;
   readonly created_at: string;
+  readonly ip_address?: string;
 }
