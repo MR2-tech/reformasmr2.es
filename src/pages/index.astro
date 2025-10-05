@@ -16,12 +16,11 @@ if (error) {
   console.error("Error fetching reviews:", error.message);
 }
 
-// Generate image arrays for different project types
 const reformaIntegralImages = Array(17)
   .fill(0)
   .map(
     (_, index) =>
-      `images/projects/reforma-integral/${index < 9 ? "0".concat((index + 1).toString()) : index + 1}.jpeg`,
+      `images/projects/reforma-integral/${index < 9 ? "0".concat((index + 1).toString()) : index + 1}.jpeg`
   );
 
 const year = new Date().getFullYear();
