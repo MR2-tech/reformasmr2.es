@@ -40,8 +40,6 @@ export const POST: APIRoute = async ({
     }
   }
 
-  console.log("Detected IP:", clientIp);
-
   const isProduction = import.meta.env.PROD;
   const shouldCheckRateLimit = isProduction || clientIp !== "localhost-dev";
 
